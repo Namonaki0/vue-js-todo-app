@@ -1,21 +1,102 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import {ref, onMounted, computed, watch} from "vue"
+
+const todos = ref([]);
+const username = ref("");
+const todo_input = ref("");
+const input_category = ref(null)
+
+const todos_ascending = computed(() => todos.value.sort((a,b) => {
+    return b.date_created - a.date_created;
+  }
+))
+
+const addTodo = () => {
+  if(todo_input.value === "" || input_category.input_category === null) {
+    return
+  }
+
+todos.value.push({
+  content: todo_input.value,
+  category: input_category.value,
+  done: false,
+  date_created: new Date().getTime()
+})
+  
+}
+
+watch(todos, (todosNewValue) => {
+  localStorage.setItem("todos", JSON.stringify(todosNewValue))
+}, {deep: true})
+
+watch(username, (nameNewValue) => {
+  localStorage.setItem("username", nameNewValue)
+})
+
+onMounted(() => {
+  username.value = localStorage.getItem("username") || ""
+  todos.value = JSON.parse(localStorage.getItem("todos")) || []
+})
+
+
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+
+  <main>
+
+    <section>
+      <h3>Hi there,
+        <input class="name-input" type="text" v-model="username" placeholder="guest" />
+      </h3>
+    </section>
+
+    <section>
+      <h3>WHAT YOU HAVE TO ACHIEVE</h3>
+
+      <form @submit.prevent="addTodo">
+        <input 
+          class="todo-input" 
+          type="text" 
+          placeholder="enter a task" 
+          v-model="todo_input">
+
+        <h4>PICK A CATEGORY</h4>
+
+        <div class="categories">
+
+          <label for="category">
+            <input 
+              type="radio" 
+              name="category" 
+              value="business" 
+              v-model="input_category">
+            <span>business</span>
+          </label>
+
+          <label for="category">
+            <input 
+              type="radio" 
+              name="category" 
+              value="leisure" 
+              v-model="input_category">
+            <span>leisure</span>
+
+          </label>
+
+          <input type="submit" value="add a todo" />
+
+          <section>
+            <div>{{todos_ascending}}</div>
+          </section>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

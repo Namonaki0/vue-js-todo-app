@@ -1,21 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;500&display=swap");
+
+:root {
+  --primary-clr: #213547;
+  --secondary-clr: #42d392;
+  --third-clr: #362b63;
+  --font-clr: #2c3e50;
+  --transition: all 150ms linear;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--primary-clr);
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  font-size: 1.2rem;
+  padding: 0 10px;
+  margin: 1.5rem 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 1px;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Teko", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  font-size: 1rem;
+  color: var(--font-clr);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem 0 0;
+  background: var(--secondary-clr);
 }
 
 input {
   border: none;
   outline: none;
-  font-size: inherit
+  font-size: inherit;
+  font-family: inherit;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 50%;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 1.5rem;
+  transition: var(--transition);
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
+.categories {
+  background: var(--primary-clr);
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+h4 {
+  background-color: #2c3e50;
+  width: 80%;
+  margin: auto;
+  padding: 5px 0;
+  font-size: 1.4rem;
+  font-weight: 100;
+  color: white;
+}
+
+.category-input-wrapper {
+  position: relative;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  margin: 10px 0;
+  background-color: var(--font-clr);
+  border-radius: 5px;
+}
+
+.category-input-wrapper input {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.category-input-wrapper input:hover {
+  cursor: pointer;
+}
+
+.categories span {
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 100;
+  font-size: 1.3rem;
 }
 
 .todo-input {
   display: block;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--primary-clr);
   margin: auto;
+}
+
+.todo-input:focus {
+  border-bottom: 2px solid #3e6485;
+  transition: --transition;
+}
+
+.inputed-todos {
+  background-color: var(--primary-clr);
+  color: white;
+  font-weight: 100;
+  padding: 0 0 2rem;
+}
+
+.inputed-todos h3 {
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+  background-color: var(--font-clr);
+  padding: 10px 0 5px;
 }

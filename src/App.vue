@@ -14,14 +14,14 @@ const todos_ascending = computed(() => todos.value.sort((a,b) => {
 const addTodo = () => {
   if(todo_input.value === "" || input_category.input_category === null) {
     return
-  }
+  } 
 
-todos.value.push({
-  content: todo_input.value,
-  category: input_category.value,
-  done: false,
-  date_created: new Date().getTime()
-})
+  todos.value.push({
+    content: todo_input.value,
+    category: input_category.value,
+    done: false,
+    date_created: new Date().getTime()
+  })
   
 }
 
@@ -46,51 +46,36 @@ onMounted(() => {
   <main>
 
     <section>
-      <h3>Hi there,
-        <input class="name-input" type="text" v-model="username" placeholder="guest" />
-      </h3>
-    </section>
-
-    <section>
-      <h3>WHAT YOU HAVE TO ACHIEVE</h3>
 
       <form @submit.prevent="addTodo">
-        <input 
-          class="todo-input" 
-          type="text" 
-          placeholder="enter a task" 
-          v-model="todo_input">
+        <input class="todo-input" type="text" placeholder="enter a task" v-model="todo_input">
 
-        <h4>PICK A CATEGORY</h4>
 
+          <h4>PICK A CATEGORY</h4>
         <div class="categories">
 
-          <label for="category">
-            <input 
-              type="radio" 
-              name="category" 
-              value="business" 
-              v-model="input_category">
-            <span>business</span>
-          </label>
+          <div class="category-input-wrapper">
 
-          <label for="category">
-            <input 
-              type="radio" 
-              name="category" 
-              value="leisure" 
-              v-model="input_category">
-            <span>leisure</span>
+              <input class="category-input" type="radio" name="category" value="business" v-model="input_category">
+              <span>business</span>
 
-          </label>
+          </div>
 
-          <input type="submit" value="add a todo" />
+          <div class="category-input-wrapper">
+              <input class="category-input" type="radio" name="category" value="leisure" v-model="input_category">
+              <span>leisure</span>
+          </div>
 
-          <section>
-            <div>{{todos_ascending}}</div>
-          </section>
 
         </div>
+
+        <input type="submit" value="add a todo" />
+
+        <section class="inputed-todos">
+          <h3>WHAT YOU HAVE TO ACHIEVE</h3>
+          <div>{{todos_ascending}}</div>
+        </section>
+
 
       </form>
 

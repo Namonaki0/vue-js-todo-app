@@ -23,6 +23,12 @@ const addTodo = () => {
     date_created: new Date().getTime()
   })
   
+  todo_input.value = ""
+  input_category.value = null
+}
+
+const deleteTodo = (todo) => {
+  todos.value = todos.value.filter(td => td !== todo)
 }
 
 watch(todos, (todosNewValue) => {
@@ -51,7 +57,7 @@ onMounted(() => {
         <input class="todo-input" type="text" placeholder="enter a task" v-model="todo_input">
 
 
-          <h4>PICK A CATEGORY</h4>
+        <h4>PICK A CATEGORY</h4>
         <div class="categories">
 
           <div class="category-input-wrapper">
@@ -73,7 +79,14 @@ onMounted(() => {
 
         <section class="inputed-todos">
           <h3>WHAT YOU HAVE TO ACHIEVE</h3>
-          <div>{{todos_ascending}}</div>
+          <div class="todos-list">
+            <div v-for="todo in todos_ascending" :class="`todo-item ${todo.category}`">
+              <input type="checkbox" v-model="todo.done" />
+              <div>{{todo.content}}</div>
+              <button class="delete-button" @click="deleteTodo(todo)">delete</button>
+            </div>
+            
+            </div>
         </section>
 
 

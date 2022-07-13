@@ -46,7 +46,7 @@ h4 {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--font-clr);
-  width: 450px;
+  min-width: 400px;
   max-width: 600px;
   margin: 0 auto;
   padding: 1rem 0 0;
@@ -107,7 +107,8 @@ input[type="radio"]::before {
   position: absolute;
 }
 
-input[type="radio"]:checked::before {
+input[type="radio"]:checked::before,
+input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
 
@@ -116,8 +117,60 @@ input[type="radio"]:focus {
   outline-offset: 2px;
 }
 
+input[type="radio"]:hover,
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
 input[type="checkbox"] {
-  margin-right: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  margin: 0 12px 0 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: var(--transition);
+  position: absolute;
+}
+
+input[type="checkbox"].leisure {
+  border: 2px solid var(--leisure);
+}
+
+input[type="checkbox"].business {
+  border: 2px solid var(--business);
+}
+
+input[type="checkbox"].leisure::before {
+  box-shadow: inset 12px 12px var(--leisure);
+  background-color: var(--leisure);
+}
+
+input[type="checkbox"].business::before {
+  box-shadow: inset 12px 12px var(--business);
+  background-color: var(--business);
+}
+
+input[type="checkbox"].business:focus {
+  outline: 2px solid var(--business);
+  outline-offset: 2px;
+}
+
+input[type="checkbox"].leisure:focus {
+  outline: 2px solid var(--leisure);
+  outline-offset: 2px;
 }
 
 .categories {
@@ -153,10 +206,6 @@ h4 {
 .category-input-wrapper input {
   display: block;
   margin-bottom: 5px;
-}
-
-.category-input-wrapper input:hover {
-  cursor: pointer;
 }
 
 .categories span {
@@ -195,12 +244,21 @@ h4 {
 
 .todo-item {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   font-size: 1.5rem;
   margin-bottom: 10px;
   text-align: left;
   padding: 7px 10px;
   border-radius: 2px;
+}
+
+.todo-content {
+  background: transparent;
+  color: white;
+}
+
+input[type="text"].todo-content {
+  margin-bottom: 0;
 }
 
 .business {
@@ -213,7 +271,7 @@ h4 {
 
 .delete-button {
   all: unset;
-  background:white;
+  background: white;
   color: var(--primary-clr);
   padding: 2px 8px;
   margin-left: auto;

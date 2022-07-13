@@ -62,31 +62,32 @@ onMounted(() => {
 
           <div class="category-input-wrapper">
 
-              <input class="category-input" type="radio" name="category" value="business" v-model="input_category">
-              <span>business</span>
+            <input class="category-input" type="radio" name="category" value="business" v-model="input_category">
+            <span>business</span>
 
           </div>
 
           <div class="category-input-wrapper">
-              <input class="category-input" type="radio" name="category" value="leisure" v-model="input_category">
-              <span>leisure</span>
+            <input class="category-input" type="radio" name="category" value="leisure" v-model="input_category">
+            <span>leisure</span>
           </div>
 
 
         </div>
 
-        <input type="submit" value="add a todo" />
+        <input type="submit" value="add a task" />
 
         <section class="inputed-todos">
           <h3>WHAT YOU HAVE TO ACHIEVE</h3>
           <div class="todos-list">
-            <div v-for="todo in todos_ascending" :class="`todo-item ${todo.category}`">
-              <input type="checkbox" v-model="todo.done" />
-              <div>{{todo.content}}</div>
+            <div :class="`todo-item ${todo.category}`" v-for="todo in todos_ascending">
+              <input :class="todo.category" type="checkbox" v-model="todo.done" />
+              <input class="todo-content" type="text" v-model="todo.content" />
+       
               <button class="delete-button" @click="deleteTodo(todo)">delete</button>
             </div>
-            
-            </div>
+
+          </div>
         </section>
 
 
